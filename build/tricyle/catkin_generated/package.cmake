@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "tricyle")
+set(tricyle_MAINTAINER "sol <sol@todo.todo>")
+set(tricyle_DEPRECATED "")
+set(tricyle_VERSION "0.0.0")
+set(tricyle_BUILD_DEPENDS )
+set(tricyle_RUN_DEPENDS )
+set(tricyle_BUILDTOOL_DEPENDS "catkin")

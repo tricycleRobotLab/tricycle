@@ -1,0 +1,8 @@
+prefix=/home/sol/Desktop/pkg/devel
+
+Name: tricyle
+Description: Description of tricyle
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/sol/Desktop/pkg/devel/lib 
+Requires: 

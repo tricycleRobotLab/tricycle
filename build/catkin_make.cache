@@ -1,0 +1,2 @@
+tricyle
+-DCATKIN_DEVEL_PREFIX=/home/sol/Desktop/pkg/devel -DCMAKE_INSTALL_PREFIX=/home/sol/Desktop/pkg/install -G Unix Makefiles

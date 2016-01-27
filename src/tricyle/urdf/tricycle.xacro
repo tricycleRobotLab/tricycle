@@ -1,0 +1,287 @@
+<?xml version="1.0"?>
+<robot name="tricycle" xmlns:xacro="http://ros.org/wiki/xacro">
+
+<xacro:property name = "wheel_length" value = "0.1"/>
+<xacro:property name = "wheel_radius" value = "0.5"/>
+
+<link name="base_link">
+	  
+	    <visual>
+			<origin xyz="0 0 0" rpy="1 1.6 1" />
+			<geometry>
+	         <cylinder length='3' radius='0.1'/>
+	        </geometry>
+			<material name="red" >
+			<color rgba="1.0 0.0 0.0 1.0 "/>
+			</material>
+	    </visual>
+	 
+</link>
+
+<link name="arm_support">
+	  
+	    <visual>
+			<origin xyz="0 -1 0.3" rpy="1 1.6 1" />
+			<geometry>
+	         <cylinder length='1.5' radius='0.2'/>
+	        </geometry>
+			<material name="red" />
+	    </visual>
+	 
+</link>
+
+<link name="left_support">
+	  
+	    <visual>
+			<origin xyz="0.75 -0.5 0.2" rpy="2.6 2 1" />
+			<geometry>
+	         <cylinder length='1' radius='0.1'/>
+	        </geometry>
+			<material name="red" />
+	    </visual>
+	 
+</link>
+
+<link name="right_support">
+	  
+	    <visual>
+			<origin xyz="-0.75 -0.5 0.2" rpy="2.6 2 1" />
+			<geometry>
+	         <cylinder length='1' radius='0.1'/>
+	        </geometry>
+			<material name="red" />
+	    </visual>
+	 
+</link>
+
+<link name="left_back_wheel">
+	  
+	    <visual>
+	    <origin xyz="0 0 0" rpy="0 1.5 0" />
+			<geometry>
+	         <cylinder length = "${wheel_length}" radius="${wheel_radius}"/>
+	         
+	        </geometry>
+			<material name="blue">
+			<color rgba="0.0 0.0 0.8 1.0 "/>
+			</material>
+	    </visual>
+	 
+</link>
+
+<link name="right_back_wheel">
+	  
+	    <visual>
+	    <origin xyz="0 0 0" rpy="0 1.5 0" />
+			<geometry>
+	         <cylinder length = "${wheel_length}" radius="${wheel_radius}"/>
+	         
+	        </geometry>
+			<material name="blue">
+			<color rgba="0.0 0.0 0.8 1.0 "/>
+			</material>
+	    </visual>
+	 
+</link>
+
+<link name="arm">
+	  
+	    <visual>
+			<origin xyz="0 1 0.3" rpy="2.6 1.56 1" />
+			<geometry>
+	         <cylinder length='4' radius='0.2'/>
+	        </geometry>
+			<material name="red" />
+	    </visual>
+	 
+</link>
+<!--
+<link name="chain">
+	  
+	    <visual>
+			<origin xyz="0.5 0 0" rpy="0 -2 1" />
+			<geometry>
+	         <sphere radius='0.2'/>
+	         
+	        </geometry>
+			<material name="magenta" />
+	    </visual>
+	 
+</link>
+-->
+<link name="upper_support">
+	  
+	    <visual>
+			<origin xyz="0 2.8 1.5" rpy="0 0 0" />
+			<geometry>
+	         <cylinder length='2' radius='0.2'/>
+	        </geometry>
+			<material name="red" />
+	    </visual>
+	 
+</link>
+
+<link name="lower_support">
+	  
+	    <visual>
+			<origin xyz="0 3.8 0.5" rpy="1 0 0" />
+			<geometry>
+	         <cylinder length='2' radius='0.2'/>
+	        </geometry>
+			<material name="red" />
+	    </visual>
+	 
+</link>
+
+<link name="front_wheel">
+	  
+	    <visual>
+	    <origin xyz="0 0 0" rpy="0 1.5 0" />
+			<geometry>
+	         <cylinder length = "${wheel_length}" radius="${wheel_radius}"/>
+	         
+	        </geometry>
+			<material name="blue" />
+	    </visual>
+	 
+</link>
+
+
+<link name="camera">
+	  
+	    <visual>
+			<origin xyz="0 3 2.3" rpy="0 0 0" />
+			<geometry>
+	         <cylinder length = "0.3" radius="0.2"/>
+	        </geometry>
+			<material name="white">
+			<color rgba="1 1 1 1.0 "/>
+			</material>
+	    </visual>
+	 
+</link>
+
+
+<!--
+<link name="camera">
+	  
+	    <visual>
+			<origin xyz="0 3 2" rpy="0 0 0" />
+			<geometry>
+	         <box size='0.5 0.5 0.5'/>
+	        </geometry>
+			<material name="white">
+			<color rgba="1 1 1 1.0 "/>
+			</material>
+	    </visual>
+	 
+</link>
+-->
+<joint name="as_to_arm" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="arm_support"/>
+    <child link="arm"/>
+ 
+ </joint>
+<!--
+<joint name="j2" type="fixed">
+    <origin xyz="0 0 10" rpy="0 0 0"/>
+    <parent link="arm_support"/>
+    <child link="base_link"/>
+ </joint>
+ -->
+ <joint name="as_to_lbl" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="arm_support"/>
+    <child link="base_link"/>
+ </joint>
+ 
+ <joint name="bl_to_lbw" type="revolute">
+    <origin xyz="1.5 0 0" rpy="0 0 0" />
+    <parent link="base_link"/>
+    <child link="left_back_wheel"/>
+    <axis xyz = "1 0 0 " />
+    <limit effort ="1000.0" lower="-1.0" upper="1.0" velocity="0.5"/>
+
+ </joint>
+ 
+ <joint name="bl_to_rbw" type="revolute">
+    <origin xyz="-1.5 0 0" rpy="0 0 0" />
+    <parent link="base_link"/>
+    <child link="right_back_wheel"/>
+    <axis xyz = "1 0 0" />
+    <limit effort ="1000.0" lower="-1.0" upper="1.0" velocity="0.5"/>
+
+  
+ </joint>
+ 
+ <!-- 
+ <joint name="bl_to_chain" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="chain"/>
+
+ </joint>
+
+ <joint name="j7" type="fixed">
+    <origin xyz="750 0 0" rpy="0 0 0"/>
+    <parent link="arm"/>
+    <child link="chain"/>
+    
+ </joint>
+ -->
+ <joint name="arm_to_us" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="arm"/>
+    <child link="upper_support"/>
+     
+ </joint>
+ 
+ <joint name = "us_to_ls" type = "fixed">
+ 	<origin xyz = "0 0 0" rpy = "0 0 0" />
+ 	<parent link = "upper_support" />
+ 	<child link = "lower_support" />
+ 	
+ </joint>
+ 
+ <joint name="ls_to_fw" type="revolute">
+    <origin xyz="0.2 4.5 0" rpy="0 0 0" />
+    <parent link="lower_support"/>
+    <child link="front_wheel"/>
+    <axis xyz = "1 0 0" />
+    <limit effort ="1000.0" lower="-1.0" upper="1.0" velocity="0.5"/>
+    
+ </joint>
+  
+ <joint name="us_to_camera" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="upper_support"/>
+    <child link="camera"/>
+    
+ </joint>
+ 
+ 
+ <joint name = "as_to_ls" type = "fixed">
+ 	<origin xyz = "0 0 0" rpy = "0 0 0" />
+ 	<parent link = "arm_support"/>
+ 	<child link = "left_support"/>
+ 	
+ </joint>
+ 
+ <joint name = "as_to_rs" type = "fixed">
+ 	<origin xyz = "0 0 0" rpy = "0 0 0" />
+ 	<parent link = "arm_support"/>
+ 	<child link = "right_support"/>
+ 	
+ </joint>
+ 
+ 
+</robot>
+
+<!--    
+to run :
+roslaunch tricyle tricycle.launch 
+
+-->
+
+
